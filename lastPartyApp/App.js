@@ -1,49 +1,26 @@
-import React from "react";
-import { StatusBar } from 'expo-status-bar';
-import { 
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TouchableHighlight,
-  Text,
-} from 'react-native';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+function HomeScreen() {
   return (
-     <SafeAreaView style={styles.container}>
-         <TouchableHighlight>
-          <View style={[styles.button, {backgroundColor: 'dodgerblue'}]}>
-              <Text>Most likely</Text>
-          </View>
-         </TouchableHighlight>
-         <TouchableHighlight>
-          <View style={[styles.button, {backgroundColor: 'gold'}]}>
-              <Text>Most likely</Text>
-          </View>
-         </TouchableHighlight>
-         <TouchableHighlight>
-          <View style={[styles.button, {backgroundColor: 'tomato'}]}>
-              <Text>Most likely</Text>
-          </View>
-         </TouchableHighlight>
-         
-     </SafeAreaView>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "space-evenly",
-    backgroundColor: "#fff",
-    padding: 20,
-    margin: 10,
-  },
-  button: {
-    flex: 0.2,
-    borderWidth: 5,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-});
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
