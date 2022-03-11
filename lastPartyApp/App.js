@@ -1,38 +1,69 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollVeiw, FlatList, Platform } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from 'react';
+import {LinearGradient} from 'expo-linear-gradient';
+import CardStack, { Card } from 'react-native-card-stack-swiper';
 
 
 function HomeScreen({ navigation }) {
     return (
       <View style={styles.homeScreenStyles}>
-        <View style={ { padding: 10, flex: 1 } }>
+        <View style={ { padding: 15, flex: 1 } }>
           <TouchableOpacity
-            onPress={() => navigation.navigate('SpinTheBottle')}
-            style={[ styles.homeScreenButton, { backgroundColor: '#495057' } ]}>
-            <Text style={styles.homeScreenCardText}>Snurra flaskan</Text>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('SpinTheBottle')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Snurra flaskan
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('NeverHaveIEver')}
-            style={[ styles.homeScreenButton, { backgroundColor: '#495057' } ]}>
-            <Text style={styles.homeScreenCardText}>Jag har aldrig</Text>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('NeverHaveIEver')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Jag har aldrig
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('HigherLower')}
-            style={[ styles.homeScreenButton, { backgroundColor: '#495057' } ]}>
-            <Text style={styles.homeScreenCardText}>Högre/lägre</Text>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('HigherLower')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Högre/lägre
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('TruthOrDare')}
-            style={[ styles.homeScreenButton, { backgroundColor: '#495057' } ]}>
-            <Text style={styles.homeScreenCardText}>Sanning eller konka</Text>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('TruthOrDare')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Sanning eller konka
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Dice')}
-            style={[ styles.homeScreenButton, { backgroundColor: '#495057' } ]}>
-            <Text style={styles.homeScreenCardText}>Tärning</Text>
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('Dice')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Tärning
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('KingsCup')}>
+            <LinearGradient colors={colorSchemeForGradient} style={styles.homeScreenButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+              <Text style={styles.homeScreenCardText}>
+                Kings cup
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
@@ -52,13 +83,14 @@ function NeverHaveIEverScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TouchableOpacity onPress = {() => setMyText(neverHaveIEverList[Math.floor(Math.random() * neverHaveIEverList.length)])}
-            style={ styles.neverHaveIEverButton }>
-            <Text style={[ styles.homeScreenCardText, {fontSize: 60}]}>Never have I ever </Text>
-            <Text style={styles.cardText}>
-            {myText}
-              </Text>
-          </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.7} onPress = {() => setMyText(neverHaveIEverList[Math.floor(Math.random() * neverHaveIEverList.length)])}>
+        <LinearGradient colors={colorSchemeForGradient} style={styles.neverHaveIEverButton} start={{ x:0, y:1 }} end={{ x:1, y:1 }}>
+            <Text style={styles.cardText}>Never have I ever</Text> 
+            <Text style={styles.cardText}> 
+              {myText}
+            </Text>
+        </LinearGradient>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -87,6 +119,73 @@ function DiceScreen({ navigation }) {
   );
 }
 
+function KingsCupScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1 }}>
+      <CardStack 
+        style={[ {flex: 5}, {alignItems: 'center'}, {justifyContent: 'center',}]}
+        renderNoMoreCards={() => <Text style={{ fontWeight: '700', fontSize: 18, color: 'gray' }}>No more cards :(</Text>}
+        ref={swiper => {
+          this.swiper = swiper
+        }}
+        >
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 1</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 2</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 3</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 4</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 5</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 6</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 7</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 8</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 9</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter 10</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter knäckt</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter dam</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Hjärter kung</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 1</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 2</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 3</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 4</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 5</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 6</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 7</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 8</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 9</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader 10</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader knäckt</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader dam</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Spader kung</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 1</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 2</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 3</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 4</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 5</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 6</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 7</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 8</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 9</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter 10</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter knäckt</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter dam</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Ruter kung</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 1</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 2</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 3</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 4</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 5</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 6</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 7</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 8</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 9</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver 10</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver knäckt</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver dam</Text></Card>
+          <Card style={[styles.card, styles.card1]}><Text style={styles.playingCardStyle}>Klöver kung</Text></Card>
+        </CardStack>
+    </View>
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -99,6 +198,7 @@ export default function App() {
         <Stack.Screen name='HigherLower' component={HigherLowerScreen} />
         <Stack.Screen name='TruthOrDare' component={TruthOrDareScreen} />
         <Stack.Screen name='Dice' component={DiceScreen} />
+        <Stack.Screen name='KingsCup' component={KingsCupScreen} />
       </Stack.Navigator>
     </NavigationContainer> 
   );
@@ -107,14 +207,17 @@ export default function App() {
 const MyTheme = {
   dark: false,
   colors: {
-    primary: '#e63946',
-    background: '#e63946',
-    card: '#e63946',
-    text: '#fff',
-    border: 'rgb(199, 199, 204)',
-    notification: 'rgb(255, 69, 58)',
+    primary: '#fefdff',
+    background: '#23232c',
+    card: '#23232c',
+    text: '#fefdff',
+    border: '#23232c',
+    notification: 'dodgerblue',
+    fontFamily: 'Avenir'
   },
 };
+
+const colorSchemeForGradient = ['#ffa32d', '#ff661a'];
 
 const styles = StyleSheet.create({
   homeScreenStyles: {
@@ -122,54 +225,74 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 8,
-    backgroundColor: '#e63946'
+    backgroundColor: '#23232c'
   },
   homeScreenButton: {
       paddingHorizontal: 8,
       paddingVertical: 6,
-      borderRadius: 4,
+      borderRadius: 15,
       backgroundColor: 'oldlace',
       alignSelf: 'center',
       marginHorizontal: '1%',
-      marginBottom: 6,
-      minWidth: '90%',
-      height: '15%',
+      marginBottom: 10,
+      minWidth: '95%',
+      minHeight: '15%',
       textAlign: 'center'
   },
   homeScreenCardText:{
-    fontSize: 20, 
-    color: '#fff', 
+    fontSize: 30, 
+    color: '#dbe9f7', 
     fontWeight: 'bold',
     alignSelf: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: Platform.OS === 'ios' ? 'Avenir': 'system font',
+    margin: 10,
   },
   neverHaveIEverButton: {
     paddingHorizontal: 8,
     paddingVertical: 6,
-    borderRadius: 4,
+    borderRadius: 30,
     backgroundColor: 'oldlace',
     alignSelf: 'center',
     marginHorizontal: '1%',
     marginBottom: 6,
-    width: '90%',
-    height: '80%',
-    textAlign: 'center',
-    backgroundColor: '#495057'
+    width: '95%',
+    height: '90%',
+    textAlign: 'center'
   },
   cardText: {
     textAlign: 'left', 
-    fontSize: 50, 
+    fontSize: 45, 
     color: '#fff',
     fontWeight: 'bold',
+    justifyContent: 'flex-end',
+    fontFamily: 'Avenir'
   },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  card: {
+    width: 320,
+    height: 470,
+    backgroundColor: '#FE474C',
+    borderRadius: 5,
+    shadowColor: 'rgba(0,0,0,0.5)',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity:0.5,
   },
-  imageStyle: {
-    width: '100%',
-    height: undefined,
-    aspectRatio: 1,
+  card1: {
+    backgroundColor: '#FE474C',
+  },
+  card2: {
+    backgroundColor: '#FEB12C',
+  },
+  playingCardStyle: {
+    lineHeight: 400,
+    textAlign: 'center',
+    fontSize: 55,
+    fontFamily: 'System',
+    color: '#ffffff',
+    backgroundColor: 'transparent',
   }
 });
 
