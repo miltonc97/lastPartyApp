@@ -61,7 +61,7 @@ function DiceScreen({ navigation }) {
   );
 }
 
-const colorSchemeForGradient = ["#1fcaa1", "#366de8"];
+const colorSchemeForGradient = ["#182340", "#182340"];
 
 const styles = StyleSheet.create({
   largeButton: {

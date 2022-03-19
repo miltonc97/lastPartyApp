@@ -147,5 +147,4 @@ export default dareList = [
   "Let the person to your left draw on your face with a pen.",
   "Imitate popular YouTube videos until someone can guess the video you are imitating.",
   "Grab a trash can and make a hoop with your hands above the trash can. Have other members of the group try to shoot trash through your hoop.",
-  "Make up a 30-second opera about a person or people in the group and perform it.",
 ];

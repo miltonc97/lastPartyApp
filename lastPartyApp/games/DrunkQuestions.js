@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -9,67 +9,65 @@ import {
   FlatList,
   Platform,
   Button,
+  Animated,
+  Easing,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable";
 
-{
-  /* TODO: Fixa så att man kan gå tillbaka till förra frågan */
-}
+function DrunkQuestionsScreen({ navigation }) {
+  const [myText, setMyText] = useState(
+    drunkQuestionsList[Math.floor(Math.random() * drunkQuestionsList.length)]
+  );
 
-function MostLikelyToScreen({ navigation }) {
+  const textTitleElement = useRef(null);
   const textBodyElement = useRef(null);
 
-  const [myText, setMyText] = useState(
-    mostLikelyToList[Math.floor(Math.random() * mostLikelyToList.length)]
-  );
   return (
     <Animatable.View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
-        alignContent: "space-around",
-      }}
+      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
       animation="bounceIn"
       duration={1200}
     >
-      <TouchableOpacity style={styles.titleBox} activeOpacity={0.7}>
-        <Animatable.Text style={styles.cardText}>
-          Who is most likely to...
-        </Animatable.Text>
-      </TouchableOpacity>
       <TouchableOpacity
         style={styles.largeButton}
         activeOpacity={0.7}
         onPress={() => {
           setMyText(
-            mostLikelyToList[
-              Math.floor(Math.random() * mostLikelyToList.length)
+            drunkQuestionsList[
+              Math.floor(Math.random() * drunkQuestionsList.length)
             ]
           );
           textBodyElement.current.animate("bounceIn", 1000, "linear");
+          textTitleElement.current.animate("bounceIn", 1000, "linear");
         }}
       >
-        <Animatable.Text ref={textBodyElement} style={styles.cardText}>
+        <Animatable.Text
+          style={styles.cardText}
+          ref={textTitleElement}
+        ></Animatable.Text>
+        <Animatable.Text style={styles.cardText} ref={textBodyElement}>
           {myText}
         </Animatable.Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.questionBox}
         onPress={() => {
           setMyText(
-            mostLikelyToList[
-              Math.floor(Math.random() * mostLikelyToList.length)
+            drunkQuestionsList[
+              Math.floor(Math.random() * drunkQuestionsList.length)
             ]
           );
           textBodyElement.current.animate("bounceIn", 1000, "linear");
         }}
         activeOpacity={0.7}
       >
-        <Text style={styles.cardText}>Nästa fråga</Text>
+        <Text
+          style={[styles.cardText, { fontSize: 30 }, { fontWeight: "bold" }]}
+        >
+          Nästa fråga
+        </Text>
       </TouchableOpacity>
     </Animatable.View>
   );
@@ -80,34 +78,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 15,
+    backgroundColor: "oldlace",
     alignSelf: "center",
+    marginHorizontal: "1%",
     marginBottom: 6,
-    width: "85%",
-    height: "40%",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#3d3e50",
     shadowOpacity: 0.5,
-  },
-  titleBox: {
-    borderRadius: 15,
-    alignSelf: "center",
-    marginBottom: 6,
-    width: "85%",
-    height: "10%",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#3d3e50",
     marginTop: "15%",
-    shadowOpacity: 0.5,
+    width: "85%",
+    height: "60%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#3d3e50",
   },
   cardText: {
     textAlign: "left",
-    fontSize: 30,
-    color: "#ffffff",
-    fontWeight: "bold",
+    fontSize: 25,
+    color: "#fff",
     justifyContent: "flex-end",
     fontFamily: Platform.OS === "ios" ? "Avenir" : "system font",
   },
@@ -128,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MostLikelyToScreen;
+export default DrunkQuestionsScreen;

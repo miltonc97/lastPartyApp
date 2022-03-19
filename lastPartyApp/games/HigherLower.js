@@ -31,11 +31,7 @@ function HigherLowerScreen({ navigation }) {
   shuffle(deck);
 
   return (
-    <Animatable.View
-      style={{ flex: 1 }}
-      animation="bounceInRight"
-      duration={800}
-    >
+    <Animatable.View style={{ flex: 1 }} animation="bounceIn" duration={1200}>
       <CardStack
         style={[
           { flex: 5 },
@@ -67,8 +63,6 @@ function shuffle(array) {
   }
   return array;
 }
-
-const colorSchemeForGradient = ["#1fcaa1", "#366de8"];
 
 const styles = StyleSheet.create({
   card: {

@@ -12,6 +12,7 @@ import {
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
+import { Icon } from "react-native-elements";
 
 function KingsCupScreen({ navigation }) {
   {
@@ -59,10 +60,10 @@ function KingsCupScreen({ navigation }) {
     "Take 2 drinks",
     "Ladies drink",
     "Create a dance move; first to screw it up has to drink",
-    "All the guys drink",
+    "Guys drink",
     "Reach for the sky; last person drinks",
     "Find a drinking buddy",
-    "Pick a category, other need to say things in that category or drink",
+    "Pick a category, others need to say things in that category or drink",
     "First to put down three fingers has to drink",
     "Loser of this has to drink",
     "Ask questions; those who answer will drink",
@@ -128,9 +129,14 @@ function KingsCupScreen({ navigation }) {
 
   return (
     <Animatable.View
-      style={{ flex: 1 }}
-      animation="bounceInRight"
-      duration={800}
+      style={[
+        { flex: 1 },
+        { alignContent: "space-around" },
+        { justifyContent: "center" },
+        { alignItems: "center" },
+      ]}
+      animation="bounceIn"
+      duration={1200}
     >
       <CardStack
         style={[
@@ -168,26 +174,10 @@ function KingsCupSettingScreen({ navigation }) {
   {
     /* TODO: Gör det möjligt att redigera vad som vissas på korten */
   }
-  return (
-    <ScrollView
-      style={styles.homeScreenViewStyle}
-      contentContainerStyle={styles.homeViewScreenViewContent}
-    >
-      <TouchableOpacity activeOpacity={0.7}>
-        <LinearGradient
-          colors={colorSchemeForGradient}
-          style={styles.mediumButton}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 1, y: 1 }}
-        >
-          <Text style={styles.mediumButtonText}>Inställnignar</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    </ScrollView>
-  );
+  return <View></View>;
 }
 
-const colorSchemeForGradient = ["#1fcaa1", "#366de8"];
+const colorSchemeForGradient = ["#182340", "#182340"];
 
 const styles = StyleSheet.create({
   card: {
@@ -217,31 +207,16 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  mediumButton: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+  infoButton: {
+    paddingVertical: 50,
     borderRadius: 15,
     backgroundColor: "oldlace",
-    alignSelf: "center",
     marginHorizontal: "1%",
-    marginBottom: 10,
-    minWidth: "95%",
-    height: "15%",
-    flex: 1,
-    textAlign: "center",
-  },
-  homeScreenViewStyle: {
-    flex: 1,
-    backgroundColor: "#23232c",
-    padding: 15,
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  homeViewScreenViewContent: {
-    alignItems: "center",
+    width: "40%",
+    height: "8%",
+    alignSelf: "center",
+    backgroundColor: "#e6e6e6",
+    alignContent: "center",
     justifyContent: "center",
   },
 });

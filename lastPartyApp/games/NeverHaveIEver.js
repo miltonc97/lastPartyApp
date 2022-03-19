@@ -27,11 +27,16 @@ function NeverHaveIEverScreen({ navigation }) {
   return (
     <Animatable.View
       style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-      animation="bounceInRight"
-      duration={800}
+      animation="bounceIn"
+      duration={1200}
     >
+      <TouchableOpacity style={styles.titleBox} activeOpacity={0.7}>
+        <Animatable.Text style={styles.cardText}>
+          Never have I ever...
+        </Animatable.Text>
+      </TouchableOpacity>
       <TouchableOpacity
-        style={{ width: "90%" }}
+        style={styles.largeButton}
         activeOpacity={0.7}
         onPress={() => {
           setMyText(
@@ -43,25 +48,31 @@ function NeverHaveIEverScreen({ navigation }) {
           textTitleElement.current.animate("bounceIn", 1000, "linear");
         }}
       >
-        <LinearGradient
-          colors={colorSchemeForGradient}
-          style={styles.largeButton}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 1, y: 1 }}
-        >
-          <Animatable.Text style={styles.cardText} ref={textTitleElement}>
-            Never have I ever
-          </Animatable.Text>
-          <Animatable.Text style={styles.cardText} ref={textBodyElement}>
-            {myText}
-          </Animatable.Text>
-        </LinearGradient>
+        <Animatable.Text
+          style={styles.cardText}
+          ref={textTitleElement}
+        ></Animatable.Text>
+        <Animatable.Text style={styles.cardText} ref={textBodyElement}>
+          {myText}
+        </Animatable.Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.questionBox}
+        onPress={() => {
+          setMyText(
+            neverHaveIEverList[
+              Math.floor(Math.random() * neverHaveIEverList.length)
+            ]
+          );
+          textBodyElement.current.animate("bounceIn", 1000, "linear");
+        }}
+        activeOpacity={0.7}
+      >
+        <Text style={styles.cardText}>Nästa fråga</Text>
       </TouchableOpacity>
     </Animatable.View>
   );
 }
-
-const colorSchemeForGradient = ["#1fcaa1", "#366de8"];
 
 const styles = StyleSheet.create({
   largeButton: {
@@ -72,22 +83,51 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginHorizontal: "1%",
     marginBottom: 6,
-    width: "95%",
-    minHeight: "40%",
+    shadowOpacity: 0.5,
+    width: "85%",
+    height: "40%",
     textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#3d3e50",
+  },
+  titleBox: {
+    borderRadius: 15,
+    backgroundColor: "oldlace",
+    alignSelf: "center",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    width: "85%",
+    height: "10%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#3d3e50",
+    marginTop: "15%",
+    shadowOpacity: 0.5,
   },
   cardText: {
     textAlign: "left",
-    fontSize: 35,
+    fontSize: 30,
     color: "#fff",
     fontWeight: "bold",
     justifyContent: "flex-end",
     fontFamily: Platform.OS === "ios" ? "Avenir" : "system font",
   },
-  square: {
-    width: 100,
-    height: 100,
-    backgroundColor: "dodgerblue",
+  questionBox: {
+    borderRadius: 15,
+    alignSelf: "center",
+    marginBottom: 6,
+    width: "85%",
+    height: "10%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "15%",
+    shadowOpacity: 0.5,
+    backgroundColor: "#4c59fe",
+    marginTop: "auto",
+    marginBottom: "15%",
   },
 });
 
